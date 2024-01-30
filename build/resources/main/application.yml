@@ -1,0 +1,66 @@
+spring:
+  config:
+    import: "optional:configserver:"
+#    import: classpath:aws.yml
+  profiles:
+    group:
+      "local": "local, common"
+      "development": "development,common"
+    active: local
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    url: jdbc:mariadb://mariadb.cjo8044kaf04.us-east-1.rds.amazonaws.com:3306/project
+    password: wodn0212
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+---
+# 공통
+spring:
+  config:
+    activate:
+      on-profile: "common"
+  servlet:
+    multipart:
+      max-file-size: 5GB
+      max-request-size: 5GB
+
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: smu-capstone-bucket1
+    stack:
+      auto: false
+    credentials:
+      instance-profile: true
+      access-key: AKIA4MTWMIVQAMBZBGUI
+      secret-key: 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
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+---
+# 로컬 환경
+spring:
+  environment: "local"
+  config:
+    activate:
+      on-profile: "local"
+  file-dir: /src/main/resources/static/files/
+---
+# 배포 환경
+spring:
+  environment: "development"
+  config:
+    activate:
+      on-profile: "development"
+  file-dir: /home/ec2-user/files/

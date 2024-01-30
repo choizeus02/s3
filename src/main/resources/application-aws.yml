@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    url: jdbc:mariadb://mariadb.cjo8044kaf04.us-east-1.rds.amazonaws.com:3306/project
+    password: wodn0212
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA4MTWMIVQAMBZBGUI
+      secret-key: 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
